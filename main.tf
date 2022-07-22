@@ -140,6 +140,13 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
   cpu    = var.taskCpu
   memory = var.taskMemory
 
+  dynamic ephemeral_storage {
+    for_each = var.ephemeralStorageAmount > 20 ? [1] : []
+    content {
+      size_in_gib = var.ephemeralStorageAmount
+    }
+  }
+
   dynamic "placement_constraints" {
     for_each = var.placement_constraints
     content {
