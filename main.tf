@@ -120,7 +120,7 @@ locals {
       workingDirectory       = var.workingDirectory == "" ? "null" : var.workingDirectory
   })
 
-  container_definition  = var.register_task_definition ? format("[%s]", templatefiles.rendered) : format("%s", templatefiles.rendered)
+  container_definition  = var.register_task_definition ? format("[%s]", templatefiles) : format("%s", templatefiles)
   container_definitions = replace(local.container_definition, "/\"(null)\"/", "$1")
 }
 
